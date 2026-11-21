@@ -9,6 +9,8 @@ import { BenchmarkModal } from './components/Benchmark/BenchmarkModal';
 import { SplitViewModal } from './components/Benchmark/SplitViewModal';
 import { IntroSplash } from './components/Modals/IntroSplash';
 import { ShortcutModal } from './components/Modals/ShortcutModal';
+import { ReconnectingBanner } from './components/Common/ReconnectingBanner';
+import { ToastContainer } from './components/Common/ToastContainer';
 import { useWebSocket } from './hooks/useWebSocket';
 import { useHotkeys } from './hooks/useHotkeys';
 
@@ -22,7 +24,10 @@ export const App: React.FC = () => {
       {/* 1. Municipal Command Top Bar */}
       <TopBar />
 
-      {/* 2. Main Interactive Workspace Grid */}
+      {/* 2. Reconnection Banner when backend is sleeping or restarting */}
+      <ReconnectingBanner />
+
+      {/* 3. Main Interactive Workspace Grid */}
       <div className="flex-1 flex overflow-hidden relative">
         {/* Left: Live SOS Triage Queue */}
         <SosTriageQueue />
@@ -39,14 +44,15 @@ export const App: React.FC = () => {
         </div>
       </div>
 
-      {/* 3. Bottom: Event Log Ticker & Real-Time KPI Strip */}
+      {/* 4. Bottom: Event Log Ticker & Real-Time KPI Strip */}
       <EventLogTicker />
 
-      {/* 4. Modals & Overlays */}
+      {/* 5. Modals & Overlays */}
       <BenchmarkModal />
       <SplitViewModal />
       <IntroSplash />
       <ShortcutModal />
+      <ToastContainer />
     </div>
   );
 };
